@@ -47,9 +47,9 @@ class Pattern {
 
         // Update the local storage
         const localStorageName = "unlocked" + (this.type[0].toUpperCase() + this.type.slice(1)) + "Patterns";
-        const currentBinaryArr = window.localStorage.getItem(localStorageName).split("");
+        const currentBinaryArr = saveData.GetProperty(localStorageName).split("");
         currentBinaryArr[this.localStorageDigit] = "1";
-        window.localStorage.setItem(localStorageName, currentBinaryArr.join(""));
+        saveData.SetProperty(localStorageName, currentBinaryArr.join(""));
 
         // Enable button
         this.domDiv.querySelector("button").disabled = false;
@@ -91,7 +91,7 @@ Pattern.InitDOM = () => {
             patternButton.style.background = pattern.iconColor;
             // Disable the button if not unlocked in local storage
             const patternListLocalStorageTitle = patternList[0][0].toUpperCase() + patternList[0].slice(1, -1);
-            if(window.localStorage.getItem("unlocked" + patternListLocalStorageTitle + "Patterns")[i] == "0") patternButton.disabled = true;
+            if(saveData.GetProperty("unlocked" + patternListLocalStorageTitle + "Patterns")[i] == "0") patternButton.disabled = true;
             // Set up event listeners depending on what the button does
             switch(pattern.color) {
                 case "customColor":
@@ -110,10 +110,10 @@ Pattern.InitDOM = () => {
                         pattern.canvasColor = colorInput.value;
                         patternButton.style.background = pattern.iconColor;
                         // Save color in local storage
-                        window.localStorage.setItem("custom" + patternListLocalStorageTitle + "Color", colorInput.value);
+                        saveData.SetProperty("custom" + patternListLocalStorageTitle + "Color", colorInput.value);
                     });
                     // To continue setting up the DOM, pull the custom color from local storage
-                    const localStorageColor = window.localStorage.getItem("custom" + patternListLocalStorageTitle + "Color");
+                    const localStorageColor = saveData.GetProperty("custom" + patternListLocalStorageTitle + "Color");
                     pattern.iconColor = localStorageColor;
                     pattern.canvasColor = localStorageColor;
                     patternButton.style.background = pattern.iconColor;
@@ -149,11 +149,11 @@ Pattern.InitDOM = () => {
                             patternButton.style.background = pattern.iconColor;
                             patternButton.style.backgroundSize = "100% 100%";
                             // Save image data in local storage
-                            window.localStorage.setItem("custom" + patternListLocalStorageTitle + "ImageData", imageData);
+                            saveData.SetProperty("custom" + patternListLocalStorageTitle + "ImageData", imageData);
                         };
                     });
                     // To continue setting up the DOM, pull the custom image data from local storage
-                    const localStorageImageData = window.localStorage.getItem("custom" + patternListLocalStorageTitle + "ImageData");
+                    const localStorageImageData = saveData.GetProperty("custom" + patternListLocalStorageTitle + "ImageData");
                     pattern.LoadImage(localStorageImageData);
                     patternButton.style.background = pattern.iconColor;
                     patternButton.style.backgroundSize = "100% 100%";
@@ -194,24 +194,24 @@ Pattern.InitDOM = () => {
     });
 
     // Set current pattern from local storage
-    currentBackground = patterns.backgrounds[window.localStorage.getItem("backgroundPattern")];
-    currentPath = patterns.paths[window.localStorage.getItem("pathPattern")];
-    currentTrail = patterns.trails[window.localStorage.getItem("trailPattern")];
+    currentBackground = patterns.backgrounds[saveData.GetProperty("backgroundPattern")];
+    currentPath = patterns.paths[saveData.GetProperty("pathPattern")];
+    currentTrail = patterns.trails[saveData.GetProperty("trailPattern")];
 };
 
 Pattern.SetBackground = (index) => {
     currentBackground = patterns.backgrounds[index];
-    window.localStorage.setItem("backgroundPattern", index)
+    saveData.SetProperty("backgroundPattern", index)
 };
 
 Pattern.SetPath = (index) => {
     currentPath = patterns.paths[index];
-    window.localStorage.setItem("pathPattern", index);
+    saveData.SetProperty("pathPattern", index);
 };
 
 Pattern.SetTrail = (index) => {
     currentTrail = patterns.trails[index];
-    window.localStorage.setItem("trailPattern", index);
+    saveData.SetProperty("trailPattern", index);
 };
 
 Pattern.UnlockAll = () => {

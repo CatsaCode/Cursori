@@ -34,9 +34,9 @@ function Fail() {
     score.risk = Math.round(score.risk);
     const riskPercent = Clamp(Math.round(score.risk / ((gameRuntime - graceMilliseconds / 1000) * score.riskWeight) * 1000) / 10, 0, 100);
     scoreText.innerText = `Score: ${score.time + score.risk} | Time: ${Math.floor(gameRuntime / 60)}:${(Math.floor(gameRuntime % 60) < 10 ? "0" : "") + Math.floor(gameRuntime % 60 * 100) / 100} | Risk: ${riskPercent}%`;
-    const highScore = window.localStorage.getItem("highScore" + currentDifficulty.name);
+    const highScore = saveData.GetProperty("highScore" + currentDifficulty.name);
     highScoreText.innerText = currentDifficulty.name + " High Score: " + highScore;
-    if(score.time + score.risk > highScore) window.localStorage.setItem("highScore" + currentDifficulty.name, score.time + score.risk);
+    if(score.time + score.risk > highScore) saveData.SetProperty("highScore" + currentDifficulty.name, score.time + score.risk);
 
     // Unlock patterns
     Object.values(patterns).forEach(patternList => patternList.forEach(elem => elem.TryUnlock(score.time + score.risk, riskPercent, gameRuntime, currentDifficulty.name)));

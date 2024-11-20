@@ -81,7 +81,7 @@
                     <input type="number" id="trailWidthInput" class="settingsInput" placeholder="(pixels)" step="1" min="1" value="5" onchange="mouseTrail.SetWidth(mouseTrail.widthInput.value)">
                 </div>
                 <br />
-                <button class="basicMenuButton settingsButton" onclick="if(confirm('Delete all save data?')) {window.localStorage.clear(); window.location.reload();}">Erase save data<img src="./Pictures/Icons/trash.svg"></button>
+                <button class="basicMenuButton settingsButton" onclick="if(confirm('Delete all save data?')) {window.localStorage.removeItem('Cursori'); window.location.reload();}">Erase save data<img src="./Pictures/Icons/trash.svg"></button>
             </div>
         </div>
 
@@ -107,6 +107,7 @@
         <script src="./JS/Mouse/mouseTrail.js"></script>
         <script src="./JS/Systems/canvas.js"></script>
         <script src="./JS/Systems/gameScreens.js"></script>
+        <script src="./JS/Systems/saveData.js"></script>
         <script src="./JS/Systems/sounds.js"></script>
         <script src="./JS/Systems/patterns.js"></script>
         <script src="./JS/main.js"></script>

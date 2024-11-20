@@ -1,36 +1,8 @@
-// Initialize a local storage item to a starting value if it's blank
-function InitLocalStorage(key, value) {
-    if(window.localStorage.getItem(key) == null) window.localStorage.setItem(key, value);
-}
-
 function Setup() {
-    // Initialize highscores
-    Object.values(difficulties).forEach(elem => {
-        const storeName = "highScore" + elem.name;
-        InitLocalStorage(storeName, "0");
-    });
-    
-    // Initialize selected patterns
-    InitLocalStorage("backgroundPattern", "0");
-    InitLocalStorage("pathPattern", "0");
-    InitLocalStorage("trailPattern", "0");
-    // Initialize unlocked patterns
-    InitLocalStorage("unlockedBackgroundPatterns", "0".repeat(patterns.backgrounds.length));
-    InitLocalStorage("unlockedPathPatterns", "0".repeat(patterns.paths.length));
-    InitLocalStorage("unlockedTrailPatterns", "0".repeat(patterns.trails.length));
-    // Initialize custom patterns
-    InitLocalStorage("customBackgroundColor", "#ff00ff");
-    InitLocalStorage("customPathColor", "#ff00ff");
-    InitLocalStorage("customTrailColor", "#ff00ff");
-    InitLocalStorage("customBackgroundImageData", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABHNCSVQICAgIfAhkiAAAAA1JREFUCFtj+M/w/z8ABv4C/pK9xMUAAAAASUVORK5CYII=");
-    InitLocalStorage("customPathImageData", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABHNCSVQICAgIfAhkiAAAAA1JREFUCFtj+M/w/z8ABv4C/pK9xMUAAAAASUVORK5CYII=");
-    InitLocalStorage("customTrailImageData", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABHNCSVQICAgIfAhkiAAAAA1JREFUCFtj+M/w/z8ABv4C/pK9xMUAAAAASUVORK5CYII=");
-    
-    // Initialize custom settings
-    InitLocalStorage("trailLength", "0.3");
-    InitLocalStorage("trailWidth", "5");
+    // Load all of the localStorage
+    saveData.Load();
 
-    // Load custom trail settings from local storage
+    // Load custom trail settings from saveData
     mouseTrail.GetSettings();
 
     // Initialize screens

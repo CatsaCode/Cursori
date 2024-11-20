@@ -18,7 +18,7 @@ const mouseTrail = {
             this.lengthInput.value = 0;
         }
         this.duration = seconds * 1000;
-        window.localStorage.setItem("trailLength", seconds);
+        saveData.SetProperty("trailLength", seconds);
     },
 
     SetWidth(pixels) {
@@ -27,12 +27,12 @@ const mouseTrail = {
             this.widthInput.value = 1;
         }
         this.width = pixels;
-        window.localStorage.setItem("trailWidth", pixels);
+        saveData.SetProperty("trailWidth", pixels);
     },
 
     GetSettings() {
-        this.SetDuration(window.localStorage.getItem("trailLength"));
-        this.SetWidth(window.localStorage.getItem("trailWidth"));
+        this.SetDuration(saveData.GetProperty("trailLength"));
+        this.SetWidth(saveData.GetProperty("trailWidth"));
         this.lengthInput.value = this.duration / 1000;
         this.widthInput.value = this.width;
     },
